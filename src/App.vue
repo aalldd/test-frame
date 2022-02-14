@@ -1,28 +1,67 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <municipal-commonLayer :height="mapHeight"
+               class="mapWrapper"
+               :plugin-path="pluginPath"
+               :lib-path="libPath"
+               :load="handleLoad"
+               :m3dInfos="m3dInfos"
+  >
+    <municipal-tool :wmtsMap="wmtsMap" :cameraView="cameraView"></municipal-tool>
+    <municipal-flood></municipal-flood>
+  </municipal-commonLayer>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss" scoped>
 </style>
+
+<script>
+export default {
+  data() {
+    return {
+      // 天地图地址
+      pluginPath: '/static/cesium/webclient-cesium-plugin.min.js',
+      libPath: '/static/cesium/Cesium.js',
+      m3dInfos: [
+        {
+          maximumMemoryUsage: 1024,
+          url: 'http://192.168.12.200:6163/igs/rest/g3d/lgzh0902',
+          layers: '',
+          vueIndex: '0'
+        }
+      ],
+      wmtsMap:null,
+      cameraView: {
+        destination: {
+          x: -2416948.392038159,
+          y: 5372543.175879652,
+          z: 2444631.2541255946
+        },
+        orientation: {
+          heading: 0.08752,
+          pitch: -0.689042,
+          roll: 0.0002114284469649675
+        }
+      }
+    };
+  },
+  computed:{
+    mapHeight(){
+      return document.body.clientHeight
+    }
+  },
+  methods: {
+    handleLoad(payload) {
+      const {component: {webGlobe}, Cesium, CesiumZondy} = payload;
+      window.webGlobe = webGlobe;
+      window.Cesium = Cesium;
+      window.CesiumZondy = CesiumZondy;
+    },
+    onM3dLoad(payload) {
+      console.log(payload);
+    },
+    getWmtsInfo(payload) {
+      this.wmtsMap = payload;
+    }
+  }
+};
+</script>

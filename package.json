@@ -9,7 +9,13 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "municipal-cesium-components": "^0.0.8",
+    "vue": "^2.6.11",
+    "@mapgis/webclient-vue-ui": "^10.5.5-3",
+    "@mapgis/webclient-vue-cesium": "^10.5.5-3",
+    "ant-design-vue": "^1.7.8",
+    "@turf/turf": "^6.5.0",
+    "vue-draggable-resizable": "^2.3.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
