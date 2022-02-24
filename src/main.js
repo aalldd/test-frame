@@ -6,9 +6,11 @@ import '@mapgis/webclient-vue-ui/dist-libs/webclient-vue-ui.css';
 import '@mapgis/webclient-vue-cesium/dist-libs/webclient-vue-cesium.css';
 import VueCesium from '@mapgis/webclient-vue-cesium';
 import MapgisUi from '@mapgis/webclient-vue-ui';
+import VueDraggableResizable from 'vue-draggable-resizable';
 import Antd from 'ant-design-vue';
 import App from './App.vue';
 
+Vue.component('vue-draggable-resizable', VueDraggableResizable);
 Vue.use(MunicipalCesium)
 Vue.use(VueCesium);
 Vue.use(Antd);

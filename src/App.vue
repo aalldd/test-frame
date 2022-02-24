@@ -7,7 +7,7 @@
                :m3dInfos="m3dInfos"
   >
     <municipal-tool :wmtsMap="wmtsMap" :cameraView="cameraView"></municipal-tool>
-    <municipal-flood></municipal-flood>
+    <municipal-dynacut title="开挖分析" :drawTools="['square', 'polygon']" :drawTextures="drawTextures" :layerIndexs="[0,1]"></municipal-dynacut>
   </municipal-commonLayer>
 </template>
 
@@ -29,6 +29,10 @@ export default {
           vueIndex: '0'
         }
       ],
+      drawTextures: [
+          '/static/cesium/model/wall.jpg',
+          '/static/cesium/model/wall1.jpg'
+        ],
       wmtsMap:null,
       cameraView: {
         destination: {
