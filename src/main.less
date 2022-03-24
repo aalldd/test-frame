@@ -1,0 +1,149 @@
+// antd样式变更
+.ant-tree li .ant-tree-node-content-wrapper {
+  width: 100%;
+}
+
+.ant-slider {
+  margin: 0;
+}
+
+.ant-table-body > table > .ant-table-tbody > tr > td {
+  margin: 0;
+  padding: 4px 8px !important;
+  max-width: 120px;
+}
+
+.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
+  padding: 0 10px;
+}
+
+.ant-table-thead > tr > th, .ant-table-tbody > tr > td {
+  padding: 4px;
+}
+
+.ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-tbody > tr > td {
+  text-align: center;
+}
+
+.ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-thead > tr > th {
+  text-align: center;
+}
+
+.ant-table-small > .ant-table-content > .ant-table-body {
+  margin: 0;
+}
+
+.ant-collapse > .ant-collapse-item {
+  &.ant-collapse-item-active {
+    margin-bottom: 0;
+  }
+
+  border-bottom: none !important;
+  margin-bottom: 10px;
+}
+
+.position-bottom {
+  position: absolute;
+  width: 1800px;
+  bottom: 2em;
+  left: 2em;
+}
+
+// cesium 全局样式
+.cesium-map-wrapper {
+  overflow: hidden !important;
+}
+
+.cesiumWrapper {
+  height: 100% !important;
+}
+
+.cesium-popup-content-wrapper {
+  width: 340px;
+  height: 340px;
+  background-color: var(--background);
+  border-radius: 0px;
+  box-shadow: none;
+  padding: 0;
+  border: none;
+
+  .cesium-popup--aligned-top-center {
+    width: 100%;
+
+    .cesium-popup__header {
+      height: 42px;
+
+      .cesium-popup__header-title {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin: 0;
+        border: 1px solid #ccc;
+        font-size: 15px;
+        padding: 6px 7px;
+        border-radius: 2px;
+        transition: background-color .2s ease-in;
+
+        &:hover {
+          background-color: var(--hover-color);
+        }
+      }
+    }
+  }
+
+  .cesium-popup_tabContainer {
+    height: 280px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    font-size: 12px;
+    margin: 0 0px 12px 15px;
+    padding-right: 6px;
+
+    .cesium-popup_radio {
+      display: none;
+    }
+
+    .cesium-popup_tab {
+      width: 100%;
+    }
+
+    .cesium-feature__field-data {
+      word-break: break-word;
+      white-space: normal;
+    }
+
+    .cesium-widget__table {
+      th, td {
+        width: 152px;
+        padding: 0.5em 0.7em;
+      }
+
+      tr {
+        border-radius: 2px;
+      }
+
+      tr:nth-child(even) {
+        background-color: var(--table-header-sort-active-bg);
+      }
+    }
+  }
+}
+
+.cesium-popup-close-button {
+  position: absolute;
+  pointer-events: all;
+  padding: 0px;
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--text-color);
+  top: 10px;
+  right: 12px;
+  z-index: 1000;
+  transition: color .2s ease-in;
+  font-family: unset;
+
+  &:hover {
+    color: var(--hover-color);
+  }
+}

@@ -1,27 +1,93 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from 'vue';
+import Router from 'vue-router';
 
-Vue.use(VueRouter)
+Vue.use(Router);
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+const router = new Router({
+    routes: [
+        {
+            path: '/',
+            name: 'root',
+            component: () => import('../views/CesiumView'),
+            children: [{
+                path: '/flood',
+                name: 'flood',
+                component: () => import('../components/analysis/FloodAna')
+                },
+                {
+                    path: '/cutfill',
+                    name: 'cutfill',
+                    component: () => import('../components/analysis/CutFillAna')
+                },
+                {
+                    path: '/dynacut',
+                    name: 'dynacut',
+                    component: () => import('../components/analysis/DynacutAna')
+                },
+                {
+                    path: '/flow',
+                    name: 'flow',
+                    component: () => import('../components/analysis/FlowAna')
+                },
+                {
+                    path: '/roll',
+                    name: 'roll',
+                    component: () => import('../components/analysis/RollAna')
+                },
+                {
+                    path: '/squib',
+                    name: 'squib',
+                    component: () => import('../components/analysis/SquibAna')
+                },
+                {
+                    path: '/tunnel',
+                    name: 'tunnel',
+                    component: () => import('../components/analysis/TunnelAna')
+                },
+                {
+                    path: '/conditionQuery',
+                    name: 'conditionQuery',
+                    component: () => import('../components/query/ConditionQueryAna')
+                },
+                {
+                    path: '/quickQuery',
+                    name: 'quickQuery',
+                    component: () => import('../components/query/QuickQueryAna')
+                },
+                {
+                    path: '/autoRoam',
+                    name: 'autoRoam',
+                    component: () => import('../components/roam/AutoRoam')
+                },
+                {
+                    path: '/fixedRoam',
+                    name: 'fixedRoam',
+                    component: () => import('../components/roam/FixedRoam')
+                },
+                {
+                    path: '/pipelineStatistic',
+                    name: 'pipelineStatistic',
+                    component: () => import('../components/statistic/PipeLineStatistic')
+                },
+                {
+                    path: '/pipePointStatistic',
+                    name: 'pipePointStatistic',
+                    component: () => import('../components/statistic/PipePointStatistic')
+                },
+                {
+                    path: '/horvercut',
+                    name: 'horvercut',
+                    component: () => import('../components/analysis/HorAndVerAna')
+                }
+            ]
+        },
+        {
+            path: '/linkage-page',
+            name: 'linkage-page',
+            component: () => import('../components/link/linkage')
+        }
+    ],
 
-const router = new VueRouter({
-  routes
-})
+});
 
-export default router
+export default router;
