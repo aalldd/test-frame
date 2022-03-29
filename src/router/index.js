@@ -13,7 +13,7 @@ const router = new Router({
                 path: '/flood',
                 name: 'flood',
                 component: () => import('../components/analysis/FloodAna')
-                },
+            },
                 {
                     path: '/cutfill',
                     name: 'cutfill',
@@ -78,6 +78,14 @@ const router = new Router({
                     path: '/horvercut',
                     name: 'horvercut',
                     component: () => import('../components/analysis/HorAndVerAna')
+                }, {
+                    path: '/connection',
+                    name: 'connection',
+                    component: () => import('../components/analysis/ConnectionAna')
+                }, {
+                    path: '/fence',
+                    name: 'fence',
+                    component: () => import('../components/analysis/FenceAna')
                 }
             ]
         },

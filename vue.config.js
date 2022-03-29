@@ -10,7 +10,7 @@ const isProd = process.env.NODE_ENV === 'production';
 module.exports = {
   productionSourceMap: false,
   lintOnSave: true,
-  publicPath: isProd ? '/production-sub-path/' : '/',
+  publicPath: isProd ? '/vueProject/cesium-prod/' : '/',
   outputDir: 'dist',
   assetsDir: 'assets',
   indexPath: 'index.html',
@@ -29,5 +29,12 @@ module.exports = {
   chainWebpack: (config) => {
     config.resolve.alias
       .set('@', resolve('./src'));
+  },
+  configureWebpack:{
+    //引入cdn中的vue和element-ui
+    externals:{
+      'vue': 'Vue',
+      'antd':'antd'
+    }
   }
 };
