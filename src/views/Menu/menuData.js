@@ -112,6 +112,11 @@ const menuData = [
                 menuName: '电子围栏',
                 menuRoute: 'fence',
                 key: '4-9'
+            },
+            {
+                menuName: '动态剖切',
+                menuRoute: 'section',
+                key: '4-10'
             }
         ]
     }
