@@ -13,7 +13,7 @@
     <Menu></Menu>
     <router-view></router-view>
     <municipal-tool :wmtsMap="wmtsMap" :popupOffset="popupOffset" :cameraView="cameraView" @clickQuery="clickQuery"
-                    :clickQueryData="clickQueryData"></municipal-tool>
+                    :clickQueryData="clickQueryData" :clampToGround="true"></municipal-tool>
   </municipal-common-layer>
 </template>
 
@@ -35,7 +35,7 @@ export default {
       m3dInfos3d: [
         {
           maximumMemoryUsage: 1024,
-          url: 'http://192.168.12.200:6163/igs/rest/g3d/lgzh0902',
+          url: 'http://192.168.12.200:6163/igs/rest/g3d/lgall220224',
           layers: '',
           vueIndex: '0'
         }
@@ -82,14 +82,6 @@ export default {
         mapSolution = ms;
       }
       this.globalConfig = mapSolution?.configJSON?.config3d;
-      //推荐将全局的配置保存在本地存储中，这样二三维联动组件可以直接取到相关配置
-      window.localStorage.setItem(this.globalConfigStore, JSON.stringify(this.globalConfig));
-      window.localStorage.setItem(this.linkageDataStore, JSON.stringify({
-        m3dInfos3d: this.m3dInfos3d,
-        m3dInfos2d: this.m3dInfos2d,
-        pluginPath: this.pluginPath,
-        libPath: this.libPath
-      }));
     }
   },
   methods: {
@@ -101,7 +93,7 @@ export default {
       const gdbp = 'gdbp://sa:sasa@192.168.12.66/龙城街道/ds/';
       this.$nextTick(async () => {
         const mapServer = this.$serve.City.Plugin("MapServer");
-        const {data: {layers}} = await mapServer.get(`/lgzh?f=json`, {params: {udt: Date.now()}});
+        const {data: {layers}} = await mapServer.get(`/lgall0224?f=json`, {params: {udt: Date.now()}});
         if (m3ds.length) {
           m3ds.forEach(m3d => {
             let gdbpUrl = m3d.gdbpUrl.split('\\');

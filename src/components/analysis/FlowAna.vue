@@ -9,14 +9,16 @@
 
 <script>
 import Store from '@/store/store';
+import funMixin from "@/funcMixins";
 
 export default {
   name: "FlowAna",
+  mixins:[funMixin],
   data() {
     return {
       //流向管网信息
       layerGroup: {
-        '给水管网': {
+        '给水': {
           subLayers: ['给水_管段'],
           url: '/static/cesium/Assets/Images/arrow.png'
         }

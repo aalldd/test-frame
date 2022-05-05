@@ -16,14 +16,13 @@ class Store {
     }
 
     //根据条件查询地下管线的信息 然后整理成tabs格式的数据，直接可以供result组件进行使用
-    async queryLayers(geometry, geometryType, where, cutLayerIndexs, offset, mapServerName, exportName, layerIds) {
+    async queryLayers(geometry, geometryType, where, cutLayerIndexs, offset, mapServerName, exportName, layerIds, currentPage, pageCount) {
         let layers;
         if (!layerIds) {
             layers = this.m3ds.filter(item => !cutLayerIndexs.includes(item.layerIndex));
         } else {
             layers = this.m3ds.filter(item => layerIds.includes(item.layerId));
         }
-
         const promises = layers.map(t => {
             if (t.gdbp) {
                 let params = {
@@ -31,6 +30,8 @@ class Store {
                     f: 'json',
                     geometry: geometry,
                     geometryType: geometryType,
+                    page: Number(currentPage) || 0,
+                    pageCount: Number(pageCount) || 10,
                     layerId: t.layerId,
                     returnIdsOnly: true,
                     returnGeometry: false
@@ -117,7 +118,7 @@ class Store {
             for (let index = 0; index < length; index++) {
                 if (index % 2 === 0) {
                     geometrys[index] = Number(geometrys[index]) + Number(offset[0]);
-                } else if (geometrys.length !== 3) {
+                } else {
                     geometrys[index] = Number(geometrys[index]) + Number(offset[1]);
                 }
             }
@@ -132,12 +133,18 @@ class Store {
                     if (params.returnIdsOnly) {//返回OID列表
                         if (geometryType === 'rect') {//矩形查询
                             let geometrys = geometry.split(',');
+                            const xList=geometrys.filter((item,index)=>index%2===0)
+                            const yList=geometrys.filter((item,index)=>index%2!==0)
+                            const xmin=_.min(xList)
+                            const xmax=_.max(xList)
+                            const ymin=_.min(yList)
+                            const ymax=_.max(yList)
                             const geom = geomUtil.toJSON({
                                 type: 'extent',
-                                xmin: Math.min(geometrys[0], geometrys[2]),
-                                xmax: Math.max(geometrys[0], geometrys[2]),
-                                ymin: Math.min(geometrys[1], geometrys[3]),
-                                ymax: Math.max(geometrys[1], geometrys[3]),
+                                xmin: xmin,
+                                xmax: xmax,
+                                ymin: ymin,
+                                ymax: ymax,
                             });
                             params.geometry = geom.geometry;
                             params.geometryType = geom.geometryType;
@@ -301,7 +308,7 @@ class Store {
             const data = Promise.all(promises);
             result = data;
         } catch (err) {
-            message.error('所选图层没有流向信息');
+            this.$message.error('所选图层没有流向信息');
             result = [];
         }
         return result;
@@ -325,12 +332,67 @@ class Store {
             data = await this.GPServer.get(mapServerName + '/GetHitDetectRulInfo', {
                 params: params
             });
+            return data;
         } catch (error) {
-            data = new Promise((resolve) => {
+            new Promise((resolve) => {
                 resolve('error');
             });
+            return [];
         }
+    }
+
+    //查询覆土埋深信息
+    async DeepDetec(mapServerName, params, geometryType, offset) {
+        if (offset) {
+            if (geometryType === 'rect') {
+                let geometrys = params.geometry;
+                geometrys.xmin = Number(geometrys.xmin) + Number(offset[0]);
+                geometrys.ymin = Number(geometrys.ymin) + Number(offset[1]);
+                geometrys.xmax = Number(geometrys.xmax) + Number(offset[0]);
+                geometrys.ymax = Number(geometrys.ymax) + Number(offset[1]);
+                params.geometry = geometrys;
+            } else if (geometryType === 'polygon') {
+                params.geometry.rings[0] = params.geometry.rings[0].map((item) => {
+                    return [Number(item[0]) + Number(offset[0]), Number(item[1]) + Number(offset[1])];
+                });
+            }
+        }
+        const {data} = await this.GPServer.get(mapServerName + '/DeepDetec', {
+            params: params
+        });
         return data;
+    }
+
+    // 查询碰撞检测信息 HitDetect?hitType={hitType}&ruleName={ruleName}&geometry={geometry}
+    async HitDetect(mapServerName, param, geometryType, offset) {
+        let params = JSON.parse(JSON.stringify(param));
+        if (offset) {
+            if (geometryType === 'rect') {
+                let geometrys = params.geometry;
+                geometrys.xmin = Number(geometrys.xmin) + Number(offset[0]);
+                geometrys.ymin = Number(geometrys.ymin) + Number(offset[1]);
+                geometrys.xmax = Number(geometrys.xmax) + Number(offset[0]);
+                geometrys.ymax = Number(geometrys.ymax) + Number(offset[1]);
+                params.geometry = geometrys;
+            } else if (geometryType === 'polygon') {
+                params.geometry.rings[0] = params.geometry.rings[0].map((item) => {
+                    return [Number(item[0]) + Number(offset[0]), Number(item[1]) + Number(offset[1])];
+                });
+            }
+        }
+        let result = [];
+        if (params.ruleName !== '') {
+            try {
+                const {data} = await this.GPServer.get(mapServerName + '/HitDetect', {
+                    params: params
+                });
+                result = data;
+            } catch (error) {
+                message.error('未查询到碰撞信息数据');
+                result = [];
+            }
+        }
+        return result;
     }
 
     //获取横断面分析信息
@@ -351,7 +413,14 @@ class Store {
         const {data} = await this.GPServer.get(mapServerName + "/ConnectionJudgeNew", {
             params: params
         });
-        return data;
+        if (!data.error) {
+            const tabs = dataFormatter(data);
+            return {
+                data, tabs
+            };
+        } else {
+            return data;
+        }
     }
 
     //获取纵断面分析信息

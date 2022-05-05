@@ -10,7 +10,7 @@ const isProd = process.env.NODE_ENV === 'production';
 module.exports = {
   productionSourceMap: false,
   lintOnSave: true,
-  publicPath: isProd ? '/vueProject/cesium-prod/' : '/',
+  publicPath: isProd ? '/cesium-prod/' : '/',
   outputDir: 'dist',
   assetsDir: 'assets',
   indexPath: 'index.html',

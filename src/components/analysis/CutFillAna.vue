@@ -1,12 +1,15 @@
 <template>
-  <municipal-cutfill :drawTextures="drawTextures">
+  <municipal-cutfill :drawTextures="drawTextures" @onClose="onClose"
+                     v-if="panelVisible">
     <municipal-cutfillresult :panelStyle="resultStyle"></municipal-cutfillresult>
   </municipal-cutfill>
 </template>
 
 <script>
+import funMixin from "@/funcMixins";
 export default {
   name: "CutFillAna",
+  mixins:[funMixin],
   data() {
     return {
       drawTextures: [
@@ -17,7 +20,7 @@ export default {
         width: '400px',
         position: 'absolute',
         left: '2em',
-        top: '2em'
+        top: '4em'
       }
     };
   }

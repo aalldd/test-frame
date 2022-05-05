@@ -10,7 +10,7 @@
                                :title="title"
                                :layerType="layerType"
                                v-if="chartVisible"
-                               @onClose="chartVisible=false">
+                               @onClose="onClose">
     </municipal-statistic-chart>
   </div>
 </template>
@@ -68,6 +68,9 @@ export default {
         this.$message.error("获取统计结果失败:" + error);
         this.loading = false;
       }
+    },
+    onClose(){
+      this.chartVisible=false
     }
   }
 };

@@ -31,92 +31,91 @@ const menuData = [
                 key: '1-1'
             }
         ]
-    }, {
-        menuName: '联动',
-        menuRoute: 'link',
-        key: '2',
-        children: [
-            {
-                menuName: '二三维联动',
-                menuRoute: 'linkage-page',
-                key: '2-0'
-            }
-        ]
-    }, {
+    },{
         menuName: '漫游',
         menuRoute: 'roam',
-        key: '3',
+        key: '2',
         children: [
             {
                 menuName: '场景漫游',
                 menuRoute: 'fixedRoam',
-                key: '3-0'
+                key: '2-0'
             },
             {
                 menuName: '自主漫游',
                 menuRoute: 'autoRoam',
-                key: '3-1'
+                key: '2-1'
             }
         ]
     }, {
         menuName: '分析',
         menuRoute: 'analysis',
-        key: '4',
+        key: '3',
         children: [
             {
                 menuName: '淹没分析',
                 menuRoute: 'flood',
-                key: '4-0'
+                key: '3-0'
             },
             {
                 menuName: '填挖方分析',
                 menuRoute: 'cutfill',
-                key: '4-1'
+                key: '3-1'
             },
             {
                 menuName: '开挖分析',
                 menuRoute: 'dynacut',
-                key: '4-2'
+                key: '3-2'
             },
             {
                 menuName: '流向分析',
                 menuRoute: 'flow',
-                key: '4-3'
+                key: '3-3'
             },
             {
                 menuName: '卷帘分析',
                 menuRoute: 'roll',
-                key: '4-4'
+                key: '3-4'
             },
             {
                 menuName: '爆管分析',
                 menuRoute: 'squib',
-                key: '4-5'
+                key: '3-5'
             },
             {
                 menuName: '隧道分析',
                 menuRoute: 'tunnel',
-                key: '4-6'
+                key: '3-6'
             },
             {
                 menuName: '断面分析',
                 menuRoute: 'horvercut',
-                key: '4-7'
+                key: '3-7'
             },
             {
                 menuName: '联通分析',
                 menuRoute: 'connection',
-                key: '4-8'
+                key: '3-8'
             },
             {
                 menuName: '电子围栏',
                 menuRoute: 'fence',
-                key: '4-9'
+                key: '3-9'
             },
             {
                 menuName: '动态剖切',
                 menuRoute: 'section',
-                key: '4-10'
+                key: '3-10'
+            },
+            {
+                menuName: '覆土埋深分析',
+                menuRoute: 'overburden',
+                key: '3-11'
+            },
+            {
+                menuName: '碰撞分析',
+                menuRoute: 'collision',
+                key: '3-12'
             }
         ]
     }

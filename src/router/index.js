@@ -90,6 +90,14 @@ const router = new Router({
                     path: '/section',
                     name: 'section',
                     component: () => import('../components/analysis/SectionAna')
+                }, {
+                    path: '/overburden',
+                    name: 'overburden',
+                    component: () => import('../components/analysis/OverBurdenAna')
+                }, {
+                    path: '/collision',
+                    name: 'collision',
+                    component: () => import('../components/analysis/CollisionAna')
                 }
             ]
         },
