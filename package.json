@@ -1,41 +1,43 @@
 {
-  "name": "test-myframe",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
-  },
-  "dependencies": {
-    "@mapgis/webclient-vue-cesium": "^10.5.5-3",
-    "@mapgis/webclient-vue-ui": "^10.5.5-3",
-    "@turf/turf": "^6.5.0",
-    "ant-design-vue": "^1.7.8",
-    "core-js": "^3.6.5",
-    "municipal-cesium-components": "0.0.10",
-    "vue": "^2.6.11",
-    "vue-draggable-resizable": "^2.3.0"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "lint-staged": "^9.5.0",
-    "sass": "^1.26.5",
-    "sass-loader": "^8.0.2",
-    "vue-template-compiler": "^2.6.11"
-  },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,jsx,vue}": [
-      "vue-cli-service lint",
-      "git add"
-    ]
-  }
+	"name": "test-myframe",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"serve": "vue-cli-service serve",
+		"build": "vue-cli-service build",
+		"lint": "vue-cli-service lint"
+	},
+	"dependencies": {
+		"@mapgis/webclient-vue-ui": "^10.5.5-3",
+		"@turf/turf": "^6.5.0",
+		"ant-design-vue": "^1.7.8",
+		"axios": "^1.1.2",
+		"core-js": "^3.6.5",
+		"municipal-cesium-lib": "0.0.41",
+		"socket.io-client": "^4.5.2",
+		"url-parse": "^1.5.10",
+		"vue": "^2.6.11",
+		"vue-draggable-resizable": "^2.3.0"
+	},
+	"devDependencies": {
+		"@vue/cli-plugin-babel": "~4.5.0",
+		"@vue/cli-plugin-eslint": "~4.5.0",
+		"@vue/cli-service": "~4.5.0",
+		"babel-eslint": "^10.1.0",
+		"eslint": "^6.7.2",
+		"eslint-plugin-vue": "^6.2.2",
+		"lint-staged": "^9.5.0",
+		"sass": "^1.26.5",
+		"sass-loader": "^8.0.2",
+		"vue-template-compiler": "^2.6.11"
+	},
+	"gitHooks": {
+		"pre-commit": "lint-staged"
+	},
+	"lint-staged": {
+		"*.{js,jsx,vue}": [
+			"vue-cli-service lint",
+			"git add"
+		]
+	}
 }
